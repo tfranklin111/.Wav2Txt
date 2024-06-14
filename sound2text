@@ -1,0 +1,17 @@
+import openai
+
+client = openai.OpenAI()
+# what file to read,!Must be on desktop!
+audio_file = open(f"/Users/someone/Desktop/Transcripts/{input("enter the file you need: ")}", "rb")
+transcription = client.audio.transcriptions.create(
+    model='whisper-1',
+    response_format='vtt',
+    file=audio_file,
+    # timestamp_granularities = ["segment"]
+)
+# write to file here
+transcription_text = transcription
+with open('/Users/someone/transcription_output.txt', "w") as text_file:
+    text_file.write(transcription_text)
+# mission accomplished
+print("All done, go have a look")
